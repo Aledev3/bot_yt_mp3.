@@ -13,6 +13,22 @@ dp = Dispatcher(bot)
 logging.basicConfig(level=logging.INFO)
 dp.middleware.setup(LoggingMiddleware())
 
+@dp.message_handler(commands=['start'])
+async def start(message: types.Message):
+    start_message = (
+        "Welcome to the YouTube Music Bot!\n\n"
+        "This bot allows you to download audio from YouTube videos and send them as MP3 files.\n\n"
+        "How to use:\n"
+        "1. Send me a YouTube video link.\n"
+        "2. I will download the audio from the video and send it to you as an MP3 file.\n\n"
+        "Please note:\n"
+        "- The audio file size is limited to 50MB due to Telegram API limits.\n"
+        "- Only valid YouTube video links are supported.\n\n"
+        "Send me a YouTube video link to get started!"
+    )
+    await message.reply(start_message)
+
+
 # Function to extract YouTube link from the message text
 def extract_youtube_link(text):
     match = re.search(r'(https?://(?:www\.)?youtube\.com\S+|https?://youtu\.be\S+)', text)
