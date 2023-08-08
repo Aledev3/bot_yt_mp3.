@@ -3,6 +3,7 @@ import re
 import os
 import subprocess
 from aiogram import Bot, Dispatcher, types
+from aiogram.types import ParseMode
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 from pytube import YouTube
 
@@ -28,6 +29,11 @@ async def start(message: types.Message):
     )
     await message.reply(start_message)
 
+@dp.message_handler(commands=['source'])
+async def source(message: types.Message):
+    source_message = "I'm an open source bot! You can find my source code on GitHub:\n\n[Link to source code](https://github.com/Aledev3/bot_yt_mp3)"
+    await message.reply(source_message, parse_mode=ParseMode.MARKDOWN)
+    
 
 # Function to extract YouTube link from the message text
 def extract_youtube_link(text):
