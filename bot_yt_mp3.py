@@ -23,21 +23,27 @@ def extract_youtube_link(text):
 async def handle_text(message: types.Message):
     text = message.text
     youtube_link = extract_youtube_link(text)
+    c = await bot.send_message(message.chat.id, "Please wait, I'm downloading the audio...")
+    await bot.send_chat_action(message.chat.id, 'upload_document')
 
     if youtube_link:
         mp3_file_path, title, artist, artist_image_url = await download_video_and_convert_to_mp3(youtube_link)
 
         if mp3_file_path:
-            c = await bot.send_message(message.chat.id, "Please wait, I'm downloading the audio...")
-            await bot.send_chat_action(message.chat.id, 'upload_document') 
+            audio_size_mb = os.path.getsize(mp3_file_path) / (1024 * 1024)  # Convert file size to MB
+            if audio_size_mb <= 50:  # Check if the file size is within the 50MB limit
 
-            with open(mp3_file_path, 'rb') as audio_file:
-                await bot.send_audio(message.chat.id, audio=audio_file, title=title, performer=artist, thumb=artist_image_url)
+                with open(mp3_file_path, 'rb') as audio_file:
+                    await bot.send_audio(message.chat.id, audio=audio_file, title=title, performer=artist, thumb=artist_image_url)
 
-            os.remove(mp3_file_path)  # Remove the temporary mp3 file after sending it
-            
-            # Delete the previous message sent by the bot (waiting message)
-            await bot.delete_message(c.chat.id, c.message_id)
+                os.remove(mp3_file_path)  # Remove the temporary mp3 file after sending it
+
+                # Delete the previous message sent by the bot (waiting message)
+                await bot.delete_message(c.chat.id, c.message_id)
+            else:
+                await message.answer("The audio file exceeds the 50MB limit and cannot be sent.")
+                os.remove(mp3_file_path)  # Remove the temporary mp3 file as it won't be sent
+                await bot.delete_message(c.chat.id, c.message_id)
         else:
             await message.answer("Sorry, unable to extract audio from the provided video.")
 
@@ -46,6 +52,7 @@ async def handle_text(message: types.Message):
 
         # Delete the previous message sent by the bot (waiting message)
         await bot.delete_message(message.chat.id, message.message_id)
+ 
 
 
 async def download_video_and_convert_to_mp3(video_url):
