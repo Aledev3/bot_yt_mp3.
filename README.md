@@ -1,5 +1,15 @@
-# bot_yt_mp3
-bot che puoi scaricare la musica dai link di YouTube e te lo da in mp3
+### Bot Scaricatore Video/Canzoni YouTube
+Hai sempre voluto scaricare un video o una canzone da YouTube?, Bene questa è la source di @{inserisci chiocciola bot}..
 
-- installate pytube
-- è poi installate airogram 
+Se la vuoi installare ecco cosa devi fare in console:
+
+Primo passo:
+
+```pip install pytube -I```
+
+Secondo passo:
+```pip install aiogram -I```
+
+
+e poi avviare {nome file principale}.py
+non siamo responsabili di alcuno tipo di crack video e/o infrangimento del copyright.
