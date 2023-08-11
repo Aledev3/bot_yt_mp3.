@@ -33,13 +33,20 @@ def create_users_table():
 create_users_table()
 
 
+
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
     user_id = message.from_user.id
     conn = sqlite3.connect('user_ids.db')
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO users (id) VALUES (?)', (user_id,))
-    conn.commit()
+    
+    try:
+        cursor.execute('INSERT INTO users (id) VALUES (?)', (user_id,))
+        conn.commit()
+    except sqlite3.IntegrityError:
+        # L'utente è già presente nella tabella
+        pass
+    
     conn.close()
     
     start_message = (
@@ -54,7 +61,6 @@ async def start(message: types.Message):
         "Send me a YouTube video link to get started!"
     )
     await message.reply(start_message)
-
 
 
 @dp.message_handler(commands=['source'])
