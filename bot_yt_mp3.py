@@ -36,19 +36,6 @@ create_users_table()
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
-    user_id = message.from_user.id
-    conn = sqlite3.connect('user_ids.db')
-    cursor = conn.cursor()
-    
-    try:
-        cursor.execute('INSERT INTO users (id) VALUES (?)', (user_id,))
-        conn.commit()
-    except sqlite3.IntegrityError:
-        # L'utente è già presente nella tabella
-        pass
-    
-    conn.close()
-    
     start_message = (
         "Welcome to the YouTube Music Bot!\n\n"
         "This bot allows you to download audio from YouTube videos and send them as MP3 files.\n\n"
