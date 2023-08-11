@@ -1,5 +1,5 @@
 ### Bot Scaricatore Video/Canzoni YouTube
-Hai sempre voluto scaricare un video o una canzone da YouTube?, Bene questa è la source di @{inserisci chiocciola bot}..
+Hai sempre voluto scaricare un video o una canzone da YouTube?, Bene questa è la source di @FullUsername0Bot..
 
 Se la vuoi installare ecco cosa devi fare in console:
 
