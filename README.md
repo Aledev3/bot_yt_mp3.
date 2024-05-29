@@ -1,15 +1,17 @@
-### Bot Scaricatore Video/Canzoni YouTube
-Hai sempre voluto scaricare un video o una canzone da YouTube?, Bene questa è la source di t.me/FullUsername0Bot..
+### YouTube Media Downloader Bot
 
-Se la vuoi installare ecco cosa devi fare in console:
+Ever wanted to download a video or song from YouTube?
 
-Primo passo:
+Here's how to install it via the console:
+
+Step One:
 
 ```pip install pytube -I```
 
-Secondo passo:
+Step Two:
+
 ```pip install aiogram -I```
 
 
-e poi avviare {nome file principale}.py
-non siamo responsabili di alcuno tipo di crack video e/o infrangimento del copyright.
+Then, simply run `main.py`.
+We are not liable for any video cracking or copyright infringement.
